@@ -3,7 +3,11 @@ val: ../valid/images
 test: ../test/images
 
 nc: 2
-names: ['Emergency lights on an ambulance or police car', 'Flashing blue and red emergency lights on top of vehicles']
+names:
+  [
+    "Emergency lights on an ambulance or police car",
+    "Flashing blue and red emergency lights on top of vehicles",
+  ]
 
 roboflow:
   workspace: hiii-pc51r
