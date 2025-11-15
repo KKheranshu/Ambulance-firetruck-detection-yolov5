@@ -96,8 +96,7 @@ GIT_INFO = check_git_info()
 
 
 def train(hyp, opt, device, callbacks):
-    """
-    Trains the YOLOv5 model on a dataset, managing hyperparameters, model optimization, logging, and validation.
+    """Trains the YOLOv5 model on a dataset, managing hyperparameters, model optimization, logging, and validation.
 
     `hyp` is path/to/hyp.yaml or hyp dictionary.
     """
@@ -541,8 +540,7 @@ def train(hyp, opt, device, callbacks):
 
 
 def parse_opt(known=False):
-    """
-    Parses command line arguments for training configurations, returning parsed arguments.
+    """Parses command line arguments for training configurations, returning parsed arguments.
 
     Supports both known and unknown args.
     """
@@ -747,8 +745,7 @@ def main(opt, callbacks=Callbacks()):
 
 
 def run(**kwargs):
-    """
-    Executes YOLOv5 training with given parameters, altering options programmatically; returns updated options.
+    """Executes YOLOv5 training with given parameters, altering options programmatically; returns updated options.
 
     Example: import train; train.run(data='coco128.yaml', imgsz=320, weights='yolov5m.pt')
     """
