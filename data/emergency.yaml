@@ -1,0 +1,5 @@
+train: datasets/emergency/images/train
+val: datasets/emergency/images/val
+
+nc: 2
+names: ['ambulance', 'firetruck']

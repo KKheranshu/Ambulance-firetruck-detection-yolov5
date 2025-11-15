@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['Emergency lights on an ambulance or police car', 'Flashing blue and red emergency lights on top of vehicles']
+
+roboflow:
+  workspace: hiii-pc51r
+  project: object-detection-icjvc-2a1u9
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/hiii-pc51r/object-detection-icjvc-2a1u9/dataset/2
