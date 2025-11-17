@@ -1,17 +1,20 @@
-import cv2
-import torch
-import numpy as np
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email import encoders
 import os
+import smtplib
 from datetime import datetime
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+import cv2
+import numpy as np
+import torch
+
 from models.common import DetectMultiBackend
 from utils.augmentations import letterbox
-from utils.torch_utils import select_device
 from utils.general import non_max_suppression
+from utils.torch_utils import select_device
+
 
 # Email alert function with attachment
 def send_alert_to_hospital(location, image_path):
@@ -23,11 +26,11 @@ def send_alert_to_hospital(location, image_path):
     body = f"Ambulance detected at {location}. Please prepare emergency team and equipment and doctors ready for the treatment.\nTimestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
     msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = recipient_email
-    msg['Subject'] = subject
+    msg["From"] = sender_email
+    msg["To"] = recipient_email
+    msg["Subject"] = subject
 
-    msg.attach(MIMEText(body, 'plain'))
+    msg.attach(MIMEText(body, "plain"))
 
     with open(image_path, "rb") as attachment:
         part = MIMEBase("application", "octet-stream")
@@ -40,7 +43,7 @@ def send_alert_to_hospital(location, image_path):
         msg.attach(part)
 
     try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
         server.login(sender_email, sender_password)
         server.send_message(msg)
@@ -49,11 +52,12 @@ def send_alert_to_hospital(location, image_path):
     except Exception as e:
         print("❌ Failed to send email:", e)
 
+
 # Select device
-device = select_device('mps' if torch.backends.mps.is_available() else 'cpu')
+device = select_device("mps" if torch.backends.mps.is_available() else "cpu")
 
 # Load model
-model_path = 'runs/train/emergency-detector-v5/weights/best.pt'
+model_path = "runs/train/emergency-detector-v5/weights/best.pt"
 model = DetectMultiBackend(model_path, device=device)
 model.conf = 0.60  # Increased confidence threshold to reduce false positives
 print("Loaded model classes:", model.names)
@@ -120,7 +124,7 @@ while True:
     cv2.putText(frame, decision, (20, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
     cv2.imshow("Smart Traffic System", frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 cap.release()
